@@ -1,5 +1,28 @@
 # Day 11 — Controlled Agent Security (2026)
 
+## Bài nộp
+
+| | |
+|---|---|
+| **Họ tên** | Lê Tuấn Đạt |
+| **MSSV** | 2A202602623 |
+| **Blue** | OpenRouter `liquid/lfm-2.5-2.6b:free` (bản trả phí hiện không còn endpoint trên OpenRouter) |
+| **Red / Red Advance** | Gemini `gemini-3.5-flash-lite` (theo `.env` lúc chạy CP4; `gemini-3.5-flash` hết quota free tier) |
+
+**Cách chạy** (từ gốc repo, sau khi tạo `.venv` và điền `.env` theo `.env.example`):
+
+```powershell
+python src/main.py --part 2   # CP2 — guardrails (in ra terminal)
+python src/main.py --part 3   # CP3 — outputs/results.json, audit_log.json, metrics.json
+python src/main.py --part 4   # CP4 — outputs/attack_results.json (+ unsafe/guards)
+pytest tests/smoke tests/public -q
+python scripts/grade.py --submission-dir . --out outputs/grade_report.json
+```
+
+Gemini free tier hay trả 429/503 — tăng `ATTACK_DELAY_SECONDS` (mặc định 15) trong `.env` nếu CP4 bị lỗi quota.
+
+---
+
 > 👤 **Hình thức:** bài tập **cá nhân** (1 người / 1 MSSV).  
 > 🎯 **Mục tiêu:** xây **Blue** (phòng thủ), rồi red-team **Red** + **Red Advance**.  
 > ✅ Làm theo **Checkpoint 1 → 5** trong [`CHECKPOINTS.md`](CHECKPOINTS.md) · nộp theo [`SUBMISSION.md`](SUBMISSION.md).
